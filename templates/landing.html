@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto">
+    <div class="glass-card p-8 md:p-12 text-center shadow-2xl">
+        <h1 class="text-4xl md:text-6xl font-black mb-2 text-slate-800">Hire with confidence.<br><span class="text-teal-600">Stop guessing skills.</span></h1>
+        <p class="text-xl text-teal-600 font-medium mb-4">A Digital Skill Verification Platform</p>
+        <p class="text-xl text-slate-600 max-w-2xl mx-auto mb-8">Send time‑limited practical tests to candidates. Get real proof of ability before you interview.</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-10">
+            <div><div class="stat-number">78%</div><p class="text-sm text-slate-500">of candidates exaggerate skills</p></div>
+            <div><div class="stat-number">40+ hrs</div><p class="text-sm text-slate-500">wasted per hire</p></div>
+            <div><div class="stat-number">$1.2k</div><p class="text-sm text-slate-500">cost of a bad hire</p></div>
+            <div><div class="stat-number">4.5s</div><p class="text-sm text-slate-500">verification time</p></div>
+        </div>
+        <div class="flex gap-5 justify-center flex-wrap">
+            <a href="/signup" class="btn-primary text-white px-8 py-3 rounded-full text-lg font-bold">Start Hiring →</a>
+            <a href="/login" class="border-2 border-teal-600 text-teal-700 bg-white px-8 py-3 rounded-full text-lg font-bold">Login</a>
+            <a href="/verify/SP-7X9K-M2P4" class="border-2 border-slate-300 text-slate-700 bg-white px-8 py-3 rounded-full text-lg font-bold"><i class="fas fa-qrcode mr-2"></i>Verify Certificate</a>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 mt-16">
+        <div class="problem-card p-6 rounded-2xl shadow">
+            <i class="fas fa-exclamation-triangle text-red-600 text-4xl mb-3"></i>
+            <h3 class="text-2xl font-bold text-red-800">The Problem</h3>
+            <ul class="mt-4 space-y-3 text-slate-700">
+                <li><i class="fas fa-times-circle text-red-500 mr-2"></i> Fake CVs waste recruiters' time</li>
+                <li><i class="fas fa-file-alt text-red-500 mr-2"></i> MCQ tests are cheated with ChatGPT</li>
+                <li><i class="fas fa-clock text-red-500 mr-2"></i> No scalable way to verify claimed skills</li>
+                <li><i class="fas fa-certificate text-red-500 mr-2"></i> Certificates are easily forged</li>
+            </ul>
+        </div>
+        <div class="solution-card p-6 rounded-2xl shadow">
+            <i class="fas fa-check-circle text-teal-600 text-4xl mb-3"></i>
+            <h3 class="text-2xl font-bold text-teal-800">SkillProof Solution</h3>
+            <ul class="mt-4 space-y-3 text-slate-700">
+                <li><i class="fas fa-link text-teal-600 mr-2"></i> <strong>One‑time test links</strong> for candidates</li>
+                <li><i class="fas fa-hourglass-half text-teal-600 mr-2"></i> Links expire after time limit → no retakes</li>
+                <li><i class="fas fa-chart-line text-teal-600 mr-2"></i> <strong>Instant results</strong> with scores</li>
+                <li><i class="fas fa-qrcode text-teal-600 mr-2"></i> <strong>Verifiable QR certificates</strong> employers trust</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="glass-card p-8 mt-16">
+        <h3 class="text-2xl font-bold text-center mb-8">How SkillProof Works</h3>
+        <div class="grid md:grid-cols-3 gap-6 text-center">
+            <div>
+                <div class="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-teal-700 mx-auto mb-3">1</div>
+                <h4 class="font-bold">Employer Creates Test</h4>
+                <p class="text-sm text-slate-600">Select skill, set time limit, generate unique link</p>
+            </div>
+            <div>
+                <div class="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-teal-700 mx-auto mb-3">2</div>
+                <h4 class="font-bold">Candidate Takes Test</h4>
+                <p class="text-sm text-slate-600">Complete practical tasks under time pressure</p>
+            </div>
+            <div>
+                <div class="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-teal-700 mx-auto mb-3">3</div>
+                <h4 class="font-bold">Instant Verification</h4>
+                <p class="text-sm text-slate-600">Employer scans QR → sees results in 4.5 seconds</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

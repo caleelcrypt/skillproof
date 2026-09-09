@@ -1,0 +1,14 @@
+[
+    {
+        "code": "SP-7X9K-M2P4",
+        "candidateName": "Sarah Chen",
+        "skillName": "Python Programming",
+        "score": 85,
+        "issuedAt": "2026-04-10T12:00:00",
+        "expiresAt": "2028-04-10T12:00:00",
+        "invitationToken": "sample_token",
+        "employerId": "emp1",
+        "skillId": "py",
+        "verifyUrl": "http://localhost:5000/verify/SP-7X9K-M2P4"
+    }
+]

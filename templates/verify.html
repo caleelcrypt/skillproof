@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <div class="glass-card p-8">
+        <div class="text-center mb-6">
+            <i class="fas fa-qrcode text-teal-600 text-5xl mb-3"></i>
+            <h2 class="text-2xl font-bold text-slate-800">Certificate Verification</h2>
+            <p class="text-slate-600 text-sm">Verify a certificate or view a sample</p>
+        </div>
+
+        <!-- Two Options -->
+        <div class="grid md:grid-cols-2 gap-4 mb-6">
+            <button onclick="showSample()" class="bg-teal-600 text-white px-4 py-3 rounded-xl font-bold hover:bg-teal-700">
+                <i class="fas fa-eye mr-2"></i> View Sample Certificate
+            </button>
+            <button onclick="showVerify()" class="border-2 border-teal-600 text-teal-700 bg-white px-4 py-3 rounded-xl font-bold hover:bg-teal-50">
+                <i class="fas fa-search mr-2"></i> Verify a Code
+            </button>
+        </div>
+
+        <!-- Sample Certificate (hidden by default) -->
+        <div id="sampleSection" style="display:none;">
+            <div class="certificate-card relative mt-4">
+                <div class="certificate-seal">✓ SAMPLE</div>
+                <div class="text-center">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2">Certificate of Proficiency</h2>
+                    <p class="text-slate-600">This certifies that</p>
+                    <h3 class="text-2xl font-bold text-teal-700 my-2">Sarah Chen</h3>
+                    <p class="text-slate-600">has demonstrated proficiency in</p>
+                    <h3 class="text-2xl font-bold text-slate-800 my-2">Python Programming</h3>
+                    <p class="text-lg">with a score of <span class="font-bold text-teal-600">85%</span></p>
+                    <div class="my-4 flex justify-center">
+                        <div id="sampleQR"></div>
+                    </div>
+                    <p class="font-mono text-sm bg-slate-100 p-2 rounded-lg">SP-7X9K-M2P4</p>
+                    <p class="text-xs text-slate-500 mt-2">Scan QR to verify OR visit: /verify/SP-7X9K-M2P4</p>
+                    <p class="text-xs text-slate-400 mt-4">Issued: 2026-04-10 | Expires: 2028-04-10</p>
+                    <div class="mt-4">
+                        <a href="/verify/SP-7X9K-M2P4" class="bg-teal-600 text-white px-4 py-2 rounded-xl"><i class="fas fa-check"></i> Verify This Certificate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verify Section (visible by default) -->
+        <div id="verifySection">
+            <div class="flex gap-3 mt-4">
+                <input type="text" id="verifyCodeInput" placeholder="Enter certificate code (e.g., SP-XXXX-XXXX)" class="flex-1 border rounded-xl p-3">
+                <button onclick="verifyCertificate()" class="btn-primary text-white px-6 py-3 rounded-xl"><i class="fas fa-search"></i> Verify</button>
+            </div>
+            <div id="verifyResult" class="mt-4"></div>
+        </div>
+
+        <div class="mt-6 border-t pt-4 text-center">
+            <p class="text-sm text-slate-500">Employers: Scan the QR code on the candidate's certificate</p>
+            <p class="text-sm text-slate-500 mt-1">Candidates: Share your certificate code for instant verification</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Show sample certificate
+    function showSample() {
+        document.getElementById('sampleSection').style.display = 'block';
+        document.getElementById('verifySection').style.display = 'none';
+        // Generate sample QR
+        new QRCode(document.getElementById('sampleQR'), {
+            text: 'http://localhost:5000/verify/SP-7X9K-M2P4',
+            width: 120,
+            height: 120
+        });
+    }
+
+    // Show verify section
+    function showVerify() {
+        document.getElementById('sampleSection').style.display = 'none';
+        document.getElementById('verifySection').style.display = 'block';
+        document.getElementById('verifyResult').innerHTML = '';
+    }
+
+    // Verify certificate
+    function verifyCertificate() {
+        const code = document.getElementById('verifyCodeInput').value.trim().toUpperCase();
+        if (!code) {
+            document.getElementById('verifyResult').innerHTML = '<p class="text-red-600 mt-2">Please enter a certificate code</p>';
+            return;
+        }
+        window.location.href = '/verify/' + code;
+    }
+</script>
+{% endblock %}

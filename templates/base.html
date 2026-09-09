@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillProof | Digital Skill Verification Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0b1120 0%, #19233c 100%);
+        }
+        .glass-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.3);
+        }
+        .btn-primary {
+            background: linear-gradient(105deg, #0d9488, #0f766e);
+            transition: all 0.2s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px -5px rgba(13,148,136,0.4);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0d9488;
+        }
+        .problem-card {
+            background: #fee2e2;
+            border-left: 6px solid #dc2626;
+        }
+        .solution-card {
+            background: #e0f2fe;
+            border-left: 6px solid #0d9488;
+        }
+        .code-editor {
+            background: #0f172a;
+            color: #e2e8f0;
+            border-radius: 1rem;
+            font-family: monospace;
+        }
+        .toast-copy {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0d9488;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 14px;
+            z-index: 1000;
+            animation: fadeOut 1.5s ease forwards;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+        .certificate-card {
+            border: 3px solid #0d9488;
+            background: linear-gradient(135deg, #f8fafc, #e6f7f5);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            position: relative;
+        }
+        .certificate-seal {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #0d9488;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .verification-badge {
+            background: #10b981;
+            color: white;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .verification-failed {
+            background: #ef4444;
+            color: white;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .nav-link {
+            transition: all 0.2s;
+        }
+        .nav-link:hover {
+            color: #0d9488;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app" class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md border-b border-teal-100">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center flex-wrap">
+            <div>
+                <a href="/" class="text-2xl font-extrabold bg-gradient-to-r from-teal-700 to-teal-500 bg-clip-text text-transparent">SkillProof</a>
+                <span class="block text-xs text-teal-600 font-medium">A Digital Skill Verification Platform</span>
+            </div>
+            <div class="flex space-x-4 items-center">
+                {% if session.user %}
+                    <span class="text-slate-700 font-medium">👋 {{ session.user.fullName }}</span>
+                    {% if session.user.role == 'employer' %}
+                        <a href="/employer" class="text-slate-700 hover:text-teal-600 nav-link">Dashboard</a>
+                    {% endif %}
+                    {% if session.user.role == 'admin' %}
+                        <a href="/admin" class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full"><i class="fas fa-user-shield"></i> Admin</a>
+                    {% endif %}
+                    <a href="/logout" class="text-red-600 hover:text-red-800"><i class="fas fa-sign-out-alt"></i></a>
+                {% else %}
+                    <a href="/login" class="text-slate-700 hover:text-teal-600 nav-link">Login</a>
+                    <a href="/signup" class="bg-teal-600 text-white px-5 py-2 rounded-full hover:bg-teal-700 transition">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-full text-white {% if category == 'success' %}bg-teal-600{% else %}bg-red-600{% endif %} z-50">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-white border-t mt-8 py-5 text-center text-slate-600 text-sm">
+        <p>© 2026 SkillProof — <i class="fas fa-shield-alt text-teal-600"></i> A Digital Skill Verification Platform</p>
+    </footer>
+</div>
+
+<script>
+    // Auto-hide flash messages
+    setTimeout(() => {
+        document.querySelectorAll('.fixed.bottom-4').forEach(el => el.remove());
+    }, 3000);
+
+    // Toast helper for copy actions
+    function showToast(msg) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-copy';
+        toast.innerText = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 1500);
+    }
+
+    function copyLink(link) {
+        navigator.clipboard.writeText(link);
+        showToast('✅ Link copied!');
+    }
+
+    function copyCertCode(code) {
+        navigator.clipboard.writeText(code);
+        showToast('✅ Certificate code copied!');
+    }
+</script>
+</body>
+</html>
