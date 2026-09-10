@@ -58,5 +58,19 @@
     "certificateCode": null,
     "completedAt": "2026-09-09T15:43:05.108838",
     "invitationToken": "214a44a1d7f0b858"
+  },
+  {
+    "name": "Ibrahim Jibo",
+    "skillId": "sql",
+    "skillName": "SQL Querying",
+    "score": 33,
+    "passed": false,
+    "certificateCode": null,
+    "completedAt": "2026-09-10T13:36:48.472474",
+    "invitationToken": "b2d07a8a05eb798d",
+    "answers": [
+      "SELECT department, COUNT(*) AS employee_count\r\nFROM employees\r\nGROUP BY department;",
+      "SELECT *\r\nFROM employees\r\nWHERE salary > 50000;"
+    ]
   }
 ]

@@ -30,5 +30,13 @@
     "password": "1234",
     "role": "employer",
     "createdAt": "2026-09-09T13:02:45.031926"
+  },
+  {
+    "id": "emp5",
+    "email": "khalilmurtalajibo04@gmail.com",
+    "fullName": "Ibrahim Murtala Jibo",
+    "password": "0124Khalil@18",
+    "role": "employer",
+    "createdAt": "2026-09-10T13:32:34.542284"
   }
 ]

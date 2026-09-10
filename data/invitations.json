@@ -90,5 +90,22 @@
     "completedAt": null,
     "expired": false,
     "createdAt": "2026-09-09T16:14:26.840059"
+  },
+  {
+    "token": "b2d07a8a05eb798d",
+    "employerId": "emp5",
+    "skillId": "sql",
+    "timeLimit": 12,
+    "candidateName": "Ibrahim Jibo",
+    "candidateEmail": "ibrahimmurtalajibo@gmail.com",
+    "status": "failed",
+    "score": 33.33333333333333,
+    "answers": [
+      "SELECT department, COUNT(*) AS employee_count\r\nFROM employees\r\nGROUP BY department;",
+      "SELECT *\r\nFROM employees\r\nWHERE salary > 50000;"
+    ],
+    "completedAt": "2026-09-10T13:36:48.470647",
+    "expired": true,
+    "createdAt": "2026-09-10T13:33:23.189332"
   }
 ]
