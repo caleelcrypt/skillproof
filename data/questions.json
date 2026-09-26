@@ -3,42 +3,42 @@
         "id": "gq1",
         "skillId": "py",
         "text": "Write a function `unique(lst)` that returns unique elements preserving order.",
-        "keywords": ["def", "return", "set"]
+        "keywords": ["def", "return", "set", "unique", "list"]
     },
     {
         "id": "gq2",
         "skillId": "py",
         "text": "Write a function `is_palindrome(s)` that checks palindrome.",
-        "keywords": ["def", "lower", "[::-1]"]
+        "keywords": ["def", "return", "lower", "[::-1]", "palindrome", "s"]
     },
     {
         "id": "gq3",
         "skillId": "py",
         "text": "Write a function `factorial(n)` that returns n! recursively.",
-        "keywords": ["def", "return", "if", "else"]
+        "keywords": ["def", "return", "if", "else", "factorial", "n"]
     },
     {
         "id": "gq4",
         "skillId": "sql",
         "text": "Write SQL to select employees with salary > 50000.",
-        "keywords": ["SELECT", "WHERE", "salary"]
+        "keywords": ["SELECT", "WHERE", "salary", "FROM", "employees"]
     },
     {
         "id": "gq5",
         "skillId": "sql",
         "text": "Write SQL to count employees per department.",
-        "keywords": ["SELECT", "COUNT", "GROUP BY"]
+        "keywords": ["SELECT", "COUNT", "GROUP BY", "FROM", "department"]
     },
     {
         "id": "gq6",
         "skillId": "js",
         "text": "Write a function `reverseString(s)` that reverses a string.",
-        "keywords": ["function", "return", "split", "reverse", "join"]
+        "keywords": ["function", "return", "split", "reverse", "join", "string"]
     },
     {
         "id": "gq7",
         "skillId": "js",
         "text": "Write a function `isEven(n)` that checks if a number is even.",
-        "keywords": ["function", "return", "%"]
+        "keywords": ["function", "return", "%", "even", "n"]
     }
 ]

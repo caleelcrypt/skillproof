@@ -72,5 +72,20 @@
       "SELECT department, COUNT(*) AS employee_count\r\nFROM employees\r\nGROUP BY department;",
       "SELECT *\r\nFROM employees\r\nWHERE salary > 50000;"
     ]
+  },
+  {
+    "name": "ibrahim",
+    "skillId": "py",
+    "skillName": "Python Programming",
+    "score": 61,
+    "passed": false,
+    "certificateCode": null,
+    "completedAt": "2026-09-25T21:00:25.566689",
+    "invitationToken": "90471249bed631ac",
+    "answers": [
+      "def unique(lst):\r\nseen = set()\r\nresult = []\r\nfor item in ist:\r\nif item not in seen:\r\nseen.add(item)\r\nresult.append(item)\r\nreturn result",
+      "def is_palindrome(s):\r\ns= s.lower()\r\nreturn s == s[: :-1]",
+      "def factorial(n):\r\nif n == 0:\r\nreturn 1\r\nelse:\r\nreturn n * factorial(n - 1)"
+    ]
   }
 ]
