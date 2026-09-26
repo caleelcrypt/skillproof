@@ -160,5 +160,20 @@
       "def is_palindrome(s):\r\n    s = s.lower()\r\n    return s == s[::-1]",
       ""
     ]
+  },
+  {
+    "name": null,
+    "skillId": "py",
+    "skillName": "Python Programming",
+    "score": 100,
+    "passed": true,
+    "certificateCode": "SP-8XZY-8FI4",
+    "completedAt": "2026-09-26T08:57:49.871982",
+    "invitationToken": "d32e89accb0f77bc",
+    "answers": [
+      "def is_palindrome(s):\r\n    s = s.lower()\r\n    return s == s[::-1]",
+      "def factorial(n):\r\n    if n == 0:\r\n        return 1\r\n    else:\r\n        return n * factorial(n - 1)",
+      "def unique(lst):\r\n    return list(set(lst))"
+    ]
   }
 ]

@@ -3,13 +3,91 @@
 {% block content %}
 <div class="max-w-2xl mx-auto">
     <div class="glass-card p-8">
+
+        {% if certificate %}
+        <!-- ✅ CERTIFICATE FOUND -->
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-slate-800">Certificate Verification</h2>
+            {% if certificate.isValid %}
+                <span class="verification-badge"><i class="fas fa-check-circle mr-1"></i> VALID</span>
+            {% else %}
+                <span class="verification-failed"><i class="fas fa-times-circle mr-1"></i> EXPIRED</span>
+            {% endif %}
+        </div>
+
+        <div class="border-t pt-6">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <span class="text-slate-500 text-sm">Certificate ID</span>
+                    <p class="font-mono font-bold">{{ certificate.code }}</p>
+                </div>
+                <div>
+                    <span class="text-slate-500 text-sm">Status</span>
+                    <p>{% if certificate.isValid %}✅ Active{% else %}❌ Expired{% endif %}</p>
+                </div>
+                <div>
+                    <span class="text-slate-500 text-sm">Candidate</span>
+                    <p class="font-bold">{{ certificate.candidateName }}</p>
+                </div>
+                <div>
+                    <span class="text-slate-500 text-sm">Skill</span>
+                    <p class="font-bold">{{ certificate.skillName }}</p>
+                </div>
+                <div>
+                    <span class="text-slate-500 text-sm">Score</span>
+                    <p class="font-bold text-teal-600">{{ certificate.score }}%</p>
+                </div>
+                <div>
+                    <span class="text-slate-500 text-sm">Issued</span>
+                    <p>{{ certificate.issuedAt[:10] }}</p>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-green-50 rounded-xl border border-green-200">
+                <p class="text-green-800">
+                    <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                    Verified: {{ certificate.candidateName }} scored {{ certificate.score }}% on {{ certificate.skillName }}.
+                </p>
+            </div>
+
+            <div class="mt-4 text-center flex justify-center gap-3 flex-wrap">
+                <button onclick="window.print()" class="bg-slate-800 text-white px-4 py-2 rounded-xl">
+                    <i class="fas fa-print"></i> Print
+                </button>
+                <a href="/verify" class="btn-primary text-white px-4 py-2 rounded-xl">
+                    <i class="fas fa-search"></i> Verify Another
+                </a>
+                <a href="/" class="bg-slate-200 text-slate-700 px-4 py-2 rounded-xl">
+                    Home
+                </a>
+            </div>
+        </div>
+
+        {% elif code %}
+        <!-- ❌ CODE ENTERED BUT NOT FOUND -->
+        <div class="text-center">
+            <i class="fas fa-times-circle text-red-500 text-5xl mb-4"></i>
+            <h2 class="text-2xl font-bold text-red-600">Certificate Not Found</h2>
+            <p class="text-slate-600 mt-2">
+                The certificate code <strong class="font-mono">{{ code }}</strong> does not exist in our system.
+            </p>
+            <p class="text-slate-500 text-sm mt-1">Please check the code and try again.</p>
+            <div class="mt-6 flex justify-center gap-3 flex-wrap">
+                <a href="/verify" class="btn-primary text-white px-4 py-2 rounded-xl">
+                    <i class="fas fa-search"></i> Try Another
+                </a>
+                <a href="/" class="bg-slate-200 text-slate-700 px-4 py-2 rounded-xl">Home</a>
+            </div>
+        </div>
+
+        {% else %}
+        <!-- 🔍 SEARCH FORM -->
         <div class="text-center mb-6">
             <i class="fas fa-qrcode text-teal-600 text-5xl mb-3"></i>
             <h2 class="text-2xl font-bold text-slate-800">Certificate Verification</h2>
             <p class="text-slate-600 text-sm">Verify a certificate or view a sample</p>
         </div>
 
-        <!-- Two Options -->
         <div class="grid md:grid-cols-2 gap-4 mb-6">
             <button onclick="showSample()" class="bg-teal-600 text-white px-4 py-3 rounded-xl font-bold hover:bg-teal-700">
                 <i class="fas fa-eye mr-2"></i> View Sample Certificate
@@ -19,7 +97,7 @@
             </button>
         </div>
 
-        <!-- Sample Certificate (hidden by default) -->
+        <!-- Sample Certificate -->
         <div id="sampleSection" style="display:none;">
             <div class="certificate-card relative mt-4">
                 <div class="certificate-seal">✓ SAMPLE</div>
@@ -30,63 +108,52 @@
                     <p class="text-slate-600">has demonstrated proficiency in</p>
                     <h3 class="text-2xl font-bold text-slate-800 my-2">Python Programming</h3>
                     <p class="text-lg">with a score of <span class="font-bold text-teal-600">85%</span></p>
-                    <div class="my-4 flex justify-center">
-                        <div id="sampleQR"></div>
-                    </div>
-                    <p class="font-mono text-sm bg-slate-100 p-2 rounded-lg">SP-7X9K-M2P4</p>
-                    <p class="text-xs text-slate-500 mt-2">Scan QR to verify OR visit: /verify/SP-7X9K-M2P4</p>
-                    <p class="text-xs text-slate-400 mt-4">Issued: 2026-04-10 | Expires: 2028-04-10</p>
-                    <div class="mt-4">
-                        <a href="/verify/SP-7X9K-M2P4" class="bg-teal-600 text-white px-4 py-2 rounded-xl"><i class="fas fa-check"></i> Verify This Certificate</a>
-                    </div>
+                    <p class="font-mono text-sm bg-slate-100 p-2 rounded-lg mt-4">SP-7X9K-M2P4</p>
+                    <p class="text-xs text-slate-500 mt-2">Issued: 2026-04-10 | Expires: 2028-04-10</p>
+                    <a href="/verify/SP-7X9K-M2P4" class="mt-4 inline-block bg-teal-600 text-white px-4 py-2 rounded-xl">
+                        <i class="fas fa-check"></i> Verify This Certificate
+                    </a>
                 </div>
             </div>
         </div>
 
-        <!-- Verify Section (visible by default) -->
+        <!-- Verify Section -->
         <div id="verifySection">
-            <div class="flex gap-3 mt-4">
-                <input type="text" id="verifyCodeInput" placeholder="Enter certificate code (e.g., SP-XXXX-XXXX)" class="flex-1 border rounded-xl p-3">
-                <button onclick="verifyCertificate()" class="btn-primary text-white px-6 py-3 rounded-xl"><i class="fas fa-search"></i> Verify</button>
-            </div>
-            <div id="verifyResult" class="mt-4"></div>
+            <form onsubmit="return doVerify(event)">
+                <div class="flex gap-3 mt-4">
+                    <input type="text" id="verifyCodeInput" placeholder="e.g., SP-7X9K-M2P4"
+                           class="flex-1 border rounded-xl p-3 font-mono" required>
+                    <button type="submit" class="btn-primary text-white px-6 py-3 rounded-xl">
+                        <i class="fas fa-search"></i> Verify
+                    </button>
+                </div>
+            </form>
         </div>
 
         <div class="mt-6 border-t pt-4 text-center">
             <p class="text-sm text-slate-500">Employers: Scan the QR code on the candidate's certificate</p>
             <p class="text-sm text-slate-500 mt-1">Candidates: Share your certificate code for instant verification</p>
         </div>
+        {% endif %}
+
     </div>
 </div>
 
 <script>
-    // Show sample certificate
-    function showSample() {
-        document.getElementById('sampleSection').style.display = 'block';
-        document.getElementById('verifySection').style.display = 'none';
-        // Generate sample QR
-        new QRCode(document.getElementById('sampleQR'), {
-            text: 'http://localhost:5000/verify/SP-7X9K-M2P4',
-            width: 120,
-            height: 120
-        });
-    }
-
-    // Show verify section
-    function showVerify() {
-        document.getElementById('sampleSection').style.display = 'none';
-        document.getElementById('verifySection').style.display = 'block';
-        document.getElementById('verifyResult').innerHTML = '';
-    }
-
-    // Verify certificate
-    function verifyCertificate() {
-        const code = document.getElementById('verifyCodeInput').value.trim().toUpperCase();
-        if (!code) {
-            document.getElementById('verifyResult').innerHTML = '<p class="text-red-600 mt-2">Please enter a certificate code</p>';
-            return;
-        }
-        window.location.href = '/verify/' + code;
-    }
+function showSample() {
+    document.getElementById('sampleSection').style.display = 'block';
+    document.getElementById('verifySection').style.display = 'none';
+}
+function showVerify() {
+    document.getElementById('sampleSection').style.display = 'none';
+    document.getElementById('verifySection').style.display = 'block';
+}
+function doVerify(event) {
+    event.preventDefault();
+    var code = document.getElementById('verifyCodeInput').value.trim().toUpperCase();
+    if (!code) { alert('Please enter a certificate code'); return false; }
+    window.location.href = '/verify/' + code;
+    return false;
+}
 </script>
 {% endblock %}

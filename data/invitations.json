@@ -30,14 +30,14 @@
     "createdAt": "2026-09-10T13:33:23.189332"
   },
   {
-    "token": "c3448ede0a778bc8",
+    "token": "d32e89accb0f77bc",
     "employerId": "emp1",
     "skillId": "py",
     "timeLimit": 15,
     "candidateName": null,
     "candidateEmail": null,
-    "status": "failed",
-    "score": 46.666666666666664,
+    "status": "passed",
+    "score": 100.0,
     "answers": [
       "def is_palindrome(s):\r\n    s = s.lower()\r\n    return s == s[::-1]",
       "def factorial(n):\r\n    if n == 0:\r\n        return 1\r\n    else:\r\n        return n * factorial(n - 1)",
@@ -48,52 +48,8 @@
       "gq3",
       "gq1"
     ],
-    "completedAt": "2026-09-26T08:36:18.658091",
+    "completedAt": "2026-09-26T08:57:49.867985",
     "expired": true,
-    "createdAt": "2026-09-26T08:34:59.684531"
-  },
-  {
-    "token": "7daab58774847056",
-    "employerId": "emp1",
-    "skillId": "sql",
-    "timeLimit": 12,
-    "candidateName": null,
-    "candidateEmail": null,
-    "status": "failed",
-    "score": 50.0,
-    "answers": [
-      "SELECT department, COUNT(*) FROM employees GROUP BY department;",
-      "SELECT * FROM employees WHERE salary > 50000;"
-    ],
-    "selectedQuestionIds": [
-      "gq5",
-      "gq4"
-    ],
-    "completedAt": "2026-09-26T08:37:59.775509",
-    "expired": true,
-    "createdAt": "2026-09-26T08:36:47.505709"
-  },
-  {
-    "token": "9c9d573e609a7af9",
-    "employerId": "emp1",
-    "skillId": "py",
-    "timeLimit": 15,
-    "candidateName": null,
-    "candidateEmail": null,
-    "status": "failed",
-    "score": 66.66666666666667,
-    "answers": [
-      "def unique(lst):\r\n    return list(set(lst))",
-      "def is_palindrome(s):\r\n    s = s.lower()\r\n    return s == s[::-1]",
-      ""
-    ],
-    "selectedQuestionIds": [
-      "gq1",
-      "gq2",
-      "gq3"
-    ],
-    "completedAt": "2026-09-26T08:41:55.816337",
-    "expired": true,
-    "createdAt": "2026-09-26T08:40:39.116207"
+    "createdAt": "2026-09-26T08:56:59.843450"
   }
 ]
