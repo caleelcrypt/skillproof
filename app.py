@@ -247,9 +247,11 @@ def submit_test():
         flash('Invalid or already completed test', 'error')
         return redirect('/')
     
+    # FIX: Build questions in the EXACT order they were shown (using saved IDs)
     all_questions = get_questions_for_skill(inv['skillId'])
     selected_ids = inv.get('selectedQuestionIds', [])
-    selected = [q for q in all_questions if q['id'] in selected_ids]
+    q_map = {q['id']: q for q in all_questions}
+    selected = [q_map[qid] for qid in selected_ids if qid in q_map]
     
     if not selected:
         random.shuffle(all_questions)
@@ -350,7 +352,8 @@ def view_answers(token):
     questions = get_questions_for_skill(inv['skillId'])
     selected_ids = inv.get('selectedQuestionIds', [])
     if selected_ids:
-        questions = [q for q in questions if q['id'] in selected_ids]
+        q_map = {q['id']: q for q in questions}
+        questions = [q_map[qid] for qid in selected_ids if qid in q_map]
     
     return render_template('answers.html', 
                          invitation=inv, 

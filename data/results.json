@@ -116,5 +116,34 @@
       "def unique(lst):\r\n    return list(set(lst))",
       "def is_palindrome(s):\r\n    s = s.lower()\r\n    return s == s[::-1]"
     ]
+  },
+  {
+    "name": null,
+    "skillId": "py",
+    "skillName": "Python Programming",
+    "score": 47,
+    "passed": false,
+    "certificateCode": null,
+    "completedAt": "2026-09-26T08:36:18.660424",
+    "invitationToken": "c3448ede0a778bc8",
+    "answers": [
+      "def is_palindrome(s):\r\n    s = s.lower()\r\n    return s == s[::-1]",
+      "def factorial(n):\r\n    if n == 0:\r\n        return 1\r\n    else:\r\n        return n * factorial(n - 1)",
+      "def unique(lst):\r\n    return list(set(lst))"
+    ]
+  },
+  {
+    "name": null,
+    "skillId": "sql",
+    "skillName": "SQL Querying",
+    "score": 50,
+    "passed": false,
+    "certificateCode": null,
+    "completedAt": "2026-09-26T08:37:59.777080",
+    "invitationToken": "7daab58774847056",
+    "answers": [
+      "SELECT department, COUNT(*) FROM employees GROUP BY department;",
+      "SELECT * FROM employees WHERE salary > 50000;"
+    ]
   }
 ]

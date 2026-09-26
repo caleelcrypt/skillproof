@@ -13,89 +13,6 @@
     "createdAt": "2026-09-09T12:57:06.300371"
   },
   {
-    "token": "6cc3ad93d1077f07",
-    "employerId": "emp1",
-    "skillId": "sql",
-    "timeLimit": 10,
-    "candidateName": "Ibrahim",
-    "candidateEmail": "ibrahim@gmail.com",
-    "status": "failed",
-    "score": 0.0,
-    "completedAt": "2026-09-09T15:02:37.091247",
-    "expired": true,
-    "createdAt": "2026-09-09T15:02:00.218595"
-  },
-  {
-    "token": "a1a077af60c15a9b",
-    "employerId": "emp1",
-    "skillId": "sql",
-    "timeLimit": 1,
-    "candidateName": "Ibrahim",
-    "candidateEmail": "ibrahim@gmail.com",
-    "status": "failed",
-    "score": 0.0,
-    "completedAt": "2026-09-09T15:06:55.873470",
-    "expired": true,
-    "createdAt": "2026-09-09T15:04:12.273034"
-  },
-  {
-    "token": "1ae4607d728e803c",
-    "employerId": "emp1",
-    "skillId": "py",
-    "timeLimit": 1,
-    "candidateName": "gj",
-    "candidateEmail": "gj@trhg.com",
-    "status": "failed",
-    "score": 47.22222222222222,
-    "completedAt": "2026-09-09T15:08:33.358676",
-    "expired": true,
-    "createdAt": "2026-09-09T15:05:36.113103"
-  },
-  {
-    "token": "4b7a2a7d5a1c0772",
-    "employerId": "emp1",
-    "skillId": "sql",
-    "timeLimit": 12,
-    "candidateName": "Ibrahim",
-    "candidateEmail": "gj@trhg.com",
-    "status": "failed",
-    "score": 33.33333333333333,
-    "completedAt": "2026-09-09T15:17:04.475414",
-    "expired": true,
-    "createdAt": "2026-09-09T15:09:24.658781"
-  },
-  {
-    "token": "214a44a1d7f0b858",
-    "employerId": "emp1",
-    "skillId": "py",
-    "timeLimit": 15,
-    "candidateName": null,
-    "candidateEmail": null,
-    "status": "failed",
-    "score": 58.333333333333336,
-    "completedAt": "2026-09-09T15:43:05.090652",
-    "expired": true,
-    "createdAt": "2026-09-09T15:41:05.703972"
-  },
-  {
-    "token": "7e2335af973ee524",
-    "employerId": "emp1",
-    "skillId": "py",
-    "timeLimit": 15,
-    "candidateName": null,
-    "candidateEmail": null,
-    "status": "failed",
-    "score": 46.666666666666664,
-    "answers": [
-      "def factorial(n):\r\n    if n == 0:\r\n        return 1\r\n    else:\r\n        return n * factorial(n - 1)",
-      "def unique(lst):\r\n    return list(set(lst))",
-      "def is_palindrome(s):\r\n    s = s.lower()\r\n    return s == s[::-1]"
-    ],
-    "completedAt": "2026-09-26T08:26:58.768692",
-    "expired": true,
-    "createdAt": "2026-09-09T16:14:26.840059"
-  },
-  {
     "token": "b2d07a8a05eb798d",
     "employerId": "emp5",
     "skillId": "sql",
@@ -113,7 +30,30 @@
     "createdAt": "2026-09-10T13:33:23.189332"
   },
   {
-    "token": "492501706d23e5ec",
+    "token": "c3448ede0a778bc8",
+    "employerId": "emp1",
+    "skillId": "py",
+    "timeLimit": 15,
+    "candidateName": null,
+    "candidateEmail": null,
+    "status": "failed",
+    "score": 46.666666666666664,
+    "answers": [
+      "def is_palindrome(s):\r\n    s = s.lower()\r\n    return s == s[::-1]",
+      "def factorial(n):\r\n    if n == 0:\r\n        return 1\r\n    else:\r\n        return n * factorial(n - 1)",
+      "def unique(lst):\r\n    return list(set(lst))"
+    ],
+    "selectedQuestionIds": [
+      "gq2",
+      "gq3",
+      "gq1"
+    ],
+    "completedAt": "2026-09-26T08:36:18.658091",
+    "expired": true,
+    "createdAt": "2026-09-26T08:34:59.684531"
+  },
+  {
+    "token": "7daab58774847056",
     "employerId": "emp1",
     "skillId": "sql",
     "timeLimit": 12,
@@ -125,26 +65,12 @@
       "SELECT department, COUNT(*) FROM employees GROUP BY department;",
       "SELECT * FROM employees WHERE salary > 50000;"
     ],
-    "completedAt": "2026-09-26T08:25:18.683936",
-    "expired": true,
-    "createdAt": "2026-09-13T20:05:10.000459"
-  },
-  {
-    "token": "90471249bed631ac",
-    "employerId": "emp1",
-    "skillId": "py",
-    "timeLimit": 15,
-    "candidateName": "ibrahim",
-    "candidateEmail": null,
-    "status": "failed",
-    "score": 61.11111111111111,
-    "answers": [
-      "def unique(lst):\r\nseen = set()\r\nresult = []\r\nfor item in ist:\r\nif item not in seen:\r\nseen.add(item)\r\nresult.append(item)\r\nreturn result",
-      "def is_palindrome(s):\r\ns= s.lower()\r\nreturn s == s[: :-1]",
-      "def factorial(n):\r\nif n == 0:\r\nreturn 1\r\nelse:\r\nreturn n * factorial(n - 1)"
+    "selectedQuestionIds": [
+      "gq5",
+      "gq4"
     ],
-    "completedAt": "2026-09-25T21:00:25.525279",
+    "completedAt": "2026-09-26T08:37:59.775509",
     "expired": true,
-    "createdAt": "2026-09-25T20:51:32.432155"
+    "createdAt": "2026-09-26T08:36:47.505709"
   }
 ]
