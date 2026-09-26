@@ -19,9 +19,15 @@
                     {% endif %}
                 </p>
             </div>
-            <a href="/employer" class="btn-primary text-white px-4 py-2 rounded-xl">
-                <i class="fas fa-arrow-left"></i> Back
-            </a>
+            {% if session.user.role == 'admin' %}
+                <a href="/admin" class="btn-primary text-white px-4 py-2 rounded-xl">
+                    <i class="fas fa-arrow-left"></i> Back to Admin
+                </a>
+            {% else %}
+                <a href="/employer" class="btn-primary text-white px-4 py-2 rounded-xl">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+            {% endif %}
         </div>
     </div>
 
@@ -32,12 +38,12 @@
                 <h3 class="font-bold text-lg text-slate-800">Task {{ loop.index }}</h3>
                 <span class="text-xs text-slate-400 font-mono">{{ q.id }}</span>
             </div>
-            
+
             <div class="mb-4">
                 <p class="text-sm font-medium text-slate-500 mb-1">Question:</p>
                 <p class="text-slate-700">{{ q.text }}</p>
             </div>
-            
+
             <div class="mb-4">
                 <p class="text-sm font-medium text-slate-500 mb-1">Expected Keywords:</p>
                 <div class="flex flex-wrap gap-2">
@@ -46,7 +52,7 @@
                     {% endfor %}
                 </div>
             </div>
-            
+
             <div>
                 <p class="text-sm font-medium text-slate-500 mb-1">Candidate's Answer:</p>
                 <pre class="bg-slate-900 text-slate-100 p-4 rounded-xl text-sm overflow-x-auto whitespace-pre-wrap">{{ answers[loop.index0] if loop.index0 < answers|length else '(no answer)' }}</pre>

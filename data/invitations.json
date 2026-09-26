@@ -51,5 +51,26 @@
     "completedAt": "2026-09-26T08:57:49.867985",
     "expired": true,
     "createdAt": "2026-09-26T08:56:59.843450"
+  },
+  {
+    "token": "00d37d5de74afc9b",
+    "employerId": "emp1",
+    "skillId": "sql",
+    "timeLimit": 12,
+    "candidateName": null,
+    "candidateEmail": null,
+    "status": "passed",
+    "score": 100.0,
+    "answers": [
+      "SELECT * FROM employees\r\nWHERE salary > 50000;",
+      "SELECT department, COUNT(*) AS employee_count\r\nFROM employees\r\nGROUP BY department;"
+    ],
+    "selectedQuestionIds": [
+      "gq4",
+      "gq5"
+    ],
+    "completedAt": "2026-09-26T09:17:18.559336",
+    "expired": true,
+    "createdAt": "2026-09-26T09:14:37.907312"
   }
 ]

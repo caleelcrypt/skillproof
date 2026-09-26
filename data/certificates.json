@@ -22,5 +22,17 @@
     "employerId": "emp1",
     "skillId": "py",
     "verifyUrl": "http://127.0.0.1:5000/verify/SP-8XZY-8FI4"
+  },
+  {
+    "code": "SP-D22I-NLOU",
+    "candidateName": null,
+    "skillName": "SQL Querying",
+    "score": 100,
+    "issuedAt": "2026-09-26T09:17:18.561556",
+    "expiresAt": "2028-09-25T09:17:18.561570",
+    "invitationToken": "00d37d5de74afc9b",
+    "employerId": "emp1",
+    "skillId": "sql",
+    "verifyUrl": "http://127.0.0.1:5000/verify/SP-D22I-NLOU"
   }
 ]
