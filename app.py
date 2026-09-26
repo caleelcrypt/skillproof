@@ -179,7 +179,8 @@ def create_invitation():
         'candidateEmail': candidate_email or None,
         'status': 'pending',
         'score': None,
-        'answers': [],  # Store answers for employer review
+        'answers': [],
+        'selectedQuestionIds': [],
         'completedAt': None,
         'expired': False,
         'createdAt': datetime.now().isoformat()
@@ -194,9 +195,11 @@ def create_invitation():
 def take_test(token):
     invitations = read_json('invitations.json')
     inv = None
-    for i in invitations:
-        if i.get('token') == token:
-            inv = i
+    idx = None
+    for i, inv_item in enumerate(invitations):
+        if inv_item.get('token') == token:
+            inv = inv_item
+            idx = i
             break
     
     if not inv:
@@ -214,6 +217,10 @@ def take_test(token):
     questions = get_questions_for_skill(inv['skillId'])
     random.shuffle(questions)
     selected_questions = questions[:3]
+    
+    invitations[idx]['selectedQuestionIds'] = [q['id'] for q in selected_questions]
+    write_json('invitations.json', invitations)
+    
     skill = get_skill_by_id(inv['skillId'])
     
     return render_template('test.html', 
@@ -240,18 +247,21 @@ def submit_test():
         flash('Invalid or already completed test', 'error')
         return redirect('/')
     
-    questions = get_questions_for_skill(inv['skillId'])
-    random.shuffle(questions)
-    selected = questions[:3]
+    all_questions = get_questions_for_skill(inv['skillId'])
+    selected_ids = inv.get('selectedQuestionIds', [])
+    selected = [q for q in all_questions if q['id'] in selected_ids]
+    
+    if not selected:
+        random.shuffle(all_questions)
+        selected = all_questions[:3]
     
     score = evaluate_test(selected, answers)
     skill = get_skill_by_id(inv['skillId'])
     passing_score = skill.get('passingScore', 70) if skill else 70
     passed = score >= passing_score
     
-    # Store answers and score
     invitations[idx]['score'] = score
-    invitations[idx]['answers'] = answers  # Store for employer to view
+    invitations[idx]['answers'] = answers
     invitations[idx]['completedAt'] = datetime.now().isoformat()
     invitations[idx]['expired'] = True
     invitations[idx]['status'] = 'passed' if passed else 'failed'
@@ -287,7 +297,7 @@ def submit_test():
         'certificateCode': code if passed else None,
         'completedAt': datetime.now().isoformat(),
         'invitationToken': token,
-        'answers': answers  # Store answers in results too
+        'answers': answers
     })
     write_json('results.json', results)
     
@@ -333,18 +343,48 @@ def view_answers(token):
         flash('Invitation not found', 'error')
         return redirect('/employer')
     
-    # Check if employer owns this invitation
     if inv.get('employerId') != session['user']['id']:
         flash('Unauthorized access', 'error')
         return redirect('/employer')
     
-    # Get the questions for context
     questions = get_questions_for_skill(inv['skillId'])
+    selected_ids = inv.get('selectedQuestionIds', [])
+    if selected_ids:
+        questions = [q for q in questions if q['id'] in selected_ids]
     
     return render_template('answers.html', 
                          invitation=inv, 
                          questions=questions,
                          answers=inv.get('answers', []))
+
+@app.route('/delete_invitation/<token>')
+def delete_invitation(token):
+    """Delete a single invitation"""
+    if 'user' not in session:
+        flash('Please login', 'error')
+        return redirect('/login')
+    
+    invitations = read_json('invitations.json')
+    invitations = [inv for inv in invitations if inv.get('token') != token]
+    write_json('invitations.json', invitations)
+    
+    flash('🗑️ Invitation deleted', 'success')
+    return redirect('/employer')
+
+@app.route('/clear_invitations')
+def clear_invitations():
+    """Delete all invitations for the logged-in employer"""
+    if 'user' not in session:
+        flash('Please login', 'error')
+        return redirect('/login')
+    
+    user_id = session['user']['id']
+    invitations = read_json('invitations.json')
+    invitations = [inv for inv in invitations if inv.get('employerId') != user_id]
+    write_json('invitations.json', invitations)
+    
+    flash('🗑️ All your invitations cleared', 'success')
+    return redirect('/employer')
 
 @app.route('/admin')
 def admin_panel():

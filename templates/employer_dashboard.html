@@ -39,7 +39,16 @@
 
     <!-- Existing invitations -->
     <div class="bg-white rounded-2xl shadow overflow-hidden">
-        <h3 class="text-xl font-bold p-5 border-b">Sent Invitations</h3>
+        <div class="flex justify-between items-center p-5 border-b">
+            <h3 class="text-xl font-bold">Sent Invitations</h3>
+            {% if invitations %}
+                <a href="/clear_invitations" 
+                   onclick="return confirm('Delete ALL your invitations? This cannot be undone.')" 
+                   class="bg-red-100 text-red-700 px-4 py-2 rounded-lg text-sm hover:bg-red-200">
+                    <i class="fas fa-trash"></i> Clear All
+                </a>
+            {% endif %}
+        </div>
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
@@ -102,6 +111,11 @@
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}
+                            <a href="/delete_invitation/{{ inv.token }}" 
+                               onclick="return confirm('Delete this invitation? This cannot be undone.')" 
+                               class="ml-2 bg-red-100 text-red-700 px-3 py-1 rounded-lg text-sm hover:bg-red-200">
+                                <i class="fas fa-trash"></i> Delete
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}
