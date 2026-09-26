@@ -72,5 +72,28 @@
     "completedAt": "2026-09-26T08:37:59.775509",
     "expired": true,
     "createdAt": "2026-09-26T08:36:47.505709"
+  },
+  {
+    "token": "9c9d573e609a7af9",
+    "employerId": "emp1",
+    "skillId": "py",
+    "timeLimit": 15,
+    "candidateName": null,
+    "candidateEmail": null,
+    "status": "failed",
+    "score": 66.66666666666667,
+    "answers": [
+      "def unique(lst):\r\n    return list(set(lst))",
+      "def is_palindrome(s):\r\n    s = s.lower()\r\n    return s == s[::-1]",
+      ""
+    ],
+    "selectedQuestionIds": [
+      "gq1",
+      "gq2",
+      "gq3"
+    ],
+    "completedAt": "2026-09-26T08:41:55.816337",
+    "expired": true,
+    "createdAt": "2026-09-26T08:40:39.116207"
   }
 ]

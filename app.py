@@ -247,7 +247,6 @@ def submit_test():
         flash('Invalid or already completed test', 'error')
         return redirect('/')
     
-    # FIX: Build questions in the EXACT order they were shown (using saved IDs)
     all_questions = get_questions_for_skill(inv['skillId'])
     selected_ids = inv.get('selectedQuestionIds', [])
     q_map = {q['id']: q for q in all_questions}
@@ -329,7 +328,7 @@ def verify_certificate(code):
 
 @app.route('/answers/<token>')
 def view_answers(token):
-    """Employer can view candidate's submitted answers"""
+    """Employer AND admin can view candidate's submitted answers"""
     if 'user' not in session:
         flash('Please login', 'error')
         return redirect('/login')
@@ -345,7 +344,8 @@ def view_answers(token):
         flash('Invitation not found', 'error')
         return redirect('/employer')
     
-    if inv.get('employerId') != session['user']['id']:
+    user = session['user']
+    if user['role'] != 'admin' and inv.get('employerId') != user['id']:
         flash('Unauthorized access', 'error')
         return redirect('/employer')
     
@@ -399,12 +399,14 @@ def admin_panel():
     questions = read_json('questions.json')
     certificates = read_json('certificates.json')
     results = read_json('results.json')
+    invitations = read_json('invitations.json')
     
     return render_template('admin.html',
                          skills=skills,
                          questions=questions,
                          certificates=certificates,
-                         results=results)
+                         results=results,
+                         invitations=invitations)
 
 @app.route('/add_skill', methods=['POST'])
 def add_skill():
