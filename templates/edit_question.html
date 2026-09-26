@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <div class="glass-card p-8">
+        <h2 class="text-3xl font-bold mb-6">Edit Question</h2>
+        <form method="POST">
+            <label class="block text-sm font-medium text-slate-700 mb-1">Question text</label>
+            <textarea name="text" rows="4" class="border p-3 w-full rounded-xl mb-4" required>{{ question.text }}</textarea>
+
+            <label class="block text-sm font-medium text-slate-700 mb-1">
+                Keywords (comma-separated)
+            </label>
+            <input type="text" name="keywords" value="{{ question.keywords | join(', ') }}" class="border p-3 w-full rounded-xl mb-4" required>
+
+            <p class="text-xs text-slate-500 mb-4">Skill ID: <span class="font-mono">{{ question.skillId }}</span></p>
+
+            <div class="flex gap-3">
+                <button type="submit" class="btn-primary text-white px-6 py-3 rounded-xl">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+                <a href="/admin" class="bg-slate-200 text-slate-700 px-6 py-3 rounded-xl">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

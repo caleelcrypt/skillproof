@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <div class="glass-card p-8">
+        <h2 class="text-3xl font-bold mb-6">Edit Skill</h2>
+        <form method="POST">
+            <label class="block text-sm font-medium text-slate-700 mb-1">Skill name</label>
+            <input type="text" name="name" value="{{ skill.name }}" class="border p-3 w-full rounded-xl mb-4" required>
+
+            <label class="block text-sm font-medium text-slate-700 mb-1">Time limit (minutes)</label>
+            <input type="number" name="time_limit" value="{{ skill.defaultTimeLimit }}" class="border p-3 w-full rounded-xl mb-4" required>
+
+            <label class="block text-sm font-medium text-slate-700 mb-1">Passing score (%)</label>
+            <input type="number" name="passing_score" value="{{ skill.passingScore }}" class="border p-3 w-full rounded-xl mb-4" required>
+
+            <div class="flex gap-3">
+                <button type="submit" class="btn-primary text-white px-6 py-3 rounded-xl">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+                <a href="/admin" class="bg-slate-200 text-slate-700 px-6 py-3 rounded-xl">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

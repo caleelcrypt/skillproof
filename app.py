@@ -269,6 +269,7 @@ def submit_test():
     write_json('invitations.json', invitations)
     
     cert_data = None
+    code = None
     if passed:
         code = generate_cert_code()
         verify_url = f"{request.host_url}verify/{code}"
@@ -457,6 +458,61 @@ def add_question():
     write_json('questions.json', questions)
     flash('Question added!', 'success')
     return redirect('/admin')
+
+@app.route('/edit_skill/<skill_id>', methods=['GET', 'POST'])
+def edit_skill(skill_id):
+    if 'user' not in session or session['user']['role'] != 'admin':
+        flash('Unauthorized', 'error')
+        return redirect('/admin')
+    
+    skills = read_json('skills.json')
+    idx = None
+    for i, s in enumerate(skills):
+        if s['id'] == skill_id:
+            idx = i
+            break
+    
+    if idx is None:
+        flash('Skill not found', 'error')
+        return redirect('/admin')
+    
+    if request.method == 'POST':
+        skills[idx]['name'] = request.form.get('name')
+        skills[idx]['defaultTimeLimit'] = int(request.form.get('time_limit', 15))
+        skills[idx]['passingScore'] = int(request.form.get('passing_score', 70))
+        write_json('skills.json', skills)
+        flash('Skill updated!', 'success')
+        return redirect('/admin')
+    
+    return render_template('edit_skill.html', skill=skills[idx])
+
+@app.route('/edit_question/<question_id>', methods=['GET', 'POST'])
+def edit_question(question_id):
+    if 'user' not in session or session['user']['role'] != 'admin':
+        flash('Unauthorized', 'error')
+        return redirect('/admin')
+    
+    questions = read_json('questions.json')
+    idx = None
+    for i, q in enumerate(questions):
+        if q['id'] == question_id:
+            idx = i
+            break
+    
+    if idx is None:
+        flash('Question not found', 'error')
+        return redirect('/admin')
+    
+    if request.method == 'POST':
+        questions[idx]['text'] = request.form.get('text')
+        keywords = request.form.get('keywords', '').split(',')
+        questions[idx]['keywords'] = [k.strip() for k in keywords if k.strip()]
+        write_json('questions.json', questions)
+        flash('Question updated!', 'success')
+        return redirect('/admin')
+    
+    skills = read_json('skills.json')
+    return render_template('edit_question.html', question=questions[idx], skills=skills)
 
 if __name__ == '__main__':
     app.run(debug=True)

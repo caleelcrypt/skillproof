@@ -1,23 +1,30 @@
 [
-    {
-        "id": "py",
-        "name": "Python Programming",
-        "description": "Core Python, data structures",
-        "defaultTimeLimit": 15,
-        "passingScore": 70
-    },
-    {
-        "id": "sql",
-        "name": "SQL Querying",
-        "description": "Joins, aggregations",
-        "defaultTimeLimit": 12,
-        "passingScore": 70
-    },
-    {
-        "id": "js",
-        "name": "JavaScript",
-        "description": "ES6, DOM manipulation",
-        "defaultTimeLimit": 15,
-        "passingScore": 70
-    }
+  {
+    "id": "py",
+    "name": "Python Programming",
+    "description": "Core Python, data structures",
+    "defaultTimeLimit": 15,
+    "passingScore": 70
+  },
+  {
+    "id": "sql",
+    "name": "SQL Querying",
+    "description": "Joins, aggregations",
+    "defaultTimeLimit": 12,
+    "passingScore": 70
+  },
+  {
+    "id": "js",
+    "name": "JavaScript",
+    "description": "ES6, DOM manipulation",
+    "defaultTimeLimit": 15,
+    "passingScore": 70
+  },
+  {
+    "id": "javascript4",
+    "name": "JavaScript",
+    "description": "",
+    "defaultTimeLimit": 15,
+    "passingScore": 70
+  }
 ]
