@@ -309,6 +309,11 @@ def submit_test():
                          skill=skill,
                          skill_name=skill.get('name') if skill else inv['skillId'])
 
+@app.route('/verify')
+def verify_page():
+    """Show the search form (no code yet)"""
+    return render_template('verify.html', certificate=None, code=None)
+
 @app.route('/verify/<code>')
 def verify_certificate(code):
     certificates = read_json('certificates.json')
